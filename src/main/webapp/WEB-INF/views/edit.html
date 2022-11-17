@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit_SP</title>
+    <meta charset="utf-8">
+</head>
+<body>
+<div align="center">
+    <form  method="post" >
+        <h1>Edit Products</h1>
+        <table>
+            <tr>
+                <td>Enter Id</td>
+                <td><input name="id"  th:value="${manh.id}" readonly></td>
+            </tr>
+            <tr>
+                <td>Enter Name</td>
+                <td><input name="name"  th:value="${manh.name}"></td>
+            </tr>
+            <tr>
+                <td>Enter Img</td>
+                <td><input name="img"  th:value="${manh.img}"></td>
+            </tr>
+            <tr>
+                <td>Enter Pice</td>
+                <td><input name="price" th:value="${manh.price}"></td>
+            </tr>
+
+        </table>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+</body>
+</html>
