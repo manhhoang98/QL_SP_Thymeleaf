@@ -1,6 +1,7 @@
 package controller;
 
 import model.Product;
+import model.dao.ProductsDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,20 +17,24 @@ public class ProductController {
     @GetMapping("/products")
     public ModelAndView getAll(){
         ModelAndView modelAndView = new ModelAndView("index");
-        modelAndView.addObject("products",productService.products);
+        modelAndView.addObject("products",productService.getAll());
         return modelAndView;
     }
     @GetMapping("/edit/{id}")
     public ModelAndView showEdit(@PathVariable int id) {
         ModelAndView modelAndView = new ModelAndView("edit");
-        modelAndView.addObject("manh",productService.getProduct(id));
+        for (Product p: ProductsDao.getAll()) {
+            if (p.getId() == id){
+                modelAndView.addObject("manh",p);
+            }
+        }
         return modelAndView;
     }
 
     @PostMapping ("/edit/{id}")
     public ModelAndView edit(@ModelAttribute Product product, @PathVariable int id) {
         ModelAndView modelAndView = new ModelAndView("redirect:/products");
-        productService.edit(productService.findIndexById(id), product);
+        ProductsDao.editProduct(productService.findIndexById(id),product);
         return modelAndView;
     }
     @GetMapping("/create")
@@ -40,14 +45,14 @@ public class ProductController {
 
     @PostMapping("/create")
     public ModelAndView create(@ModelAttribute Product product){
-        productService.products.add(product);
+        productService.add(product);
         ModelAndView modelAndView = new ModelAndView("redirect:/products");
         return modelAndView;
     }
 
         @GetMapping("/delete/{id}")
     public ModelAndView delete(@PathVariable int id){
-        productService.delete(id);
+        ProductsDao.deleteProduct(id);
         ModelAndView modelAndView = new ModelAndView("redirect:/products");
         return modelAndView;
     }

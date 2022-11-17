@@ -1,6 +1,7 @@
 package service;
 
 import model.Product;
+import model.dao.ProductsDao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,14 +9,12 @@ import java.util.List;
 public class ProductService {
     public List<Product> products = new ArrayList<>();
 
-    public ProductService() {
-        products.add(new Product(1,"Toan","http://hanoimoi.com.vn/Uploads/tuandiep/2018/4/8/1(1).jpg",200));
-        products.add(new Product(2,"Toan2","https://kynguyenlamdep.com/wp-content/uploads/2020/01/hinh-anh-chu-chim-dep.jpg",200));
-        products.add(new Product(3,"Toan3","https://kynguyenlamdep.com/wp-content/uploads/2020/01/hinh-anh-chu-chim-dep.jpg",200));
+    public List<Product> getAll(){
+        return ProductsDao.getAll();
     }
 
     public void add(Product product){
-        products.add(product);
+        ProductsDao.saveProduct(product);
     }
     public void edit(int id, Product product){
             products.set(id,product);
@@ -37,8 +36,8 @@ public class ProductService {
         }
     }
 
-    public  Product getProduct(int id){
-        return products.get(findIndexById(id));
-    }
+//    public  Product getProduct(int id){
+//        return products.get(findIndexById(id));
+//    }
 
 }

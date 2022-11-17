@@ -62,4 +62,6 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
         viewResolver.setCharacterEncoding("UTF-8");
         return viewResolver;
     }
+
+
 }
